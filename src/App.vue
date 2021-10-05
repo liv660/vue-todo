@@ -1,13 +1,14 @@
 <template>
   <div id="app" class="container">
     <TodoInput v-on:addNewTodo="addNewTodo"/>
-    <TodoList v-bind:propsTodo="todoItems" v-on:removeTodo="removeTodo"/>
+    <TodoList v-bind:propsTodo="todoItems" v-on:removeTodo="removeTodo" v-on:removeTodoAll="removeTodoAll"/>
   </div>
 </template>
 
 <script>
 import TodoInput from './components/TodoInput.vue'
 import TodoList from './components/TodoList.vue'
+
 export default {
   name: 'app',
   components: {
@@ -35,6 +36,10 @@ export default {
       localStorage.removeItem(todoItem)
       this.todoItems.splice(idx, 1)
     },
+    removeTodoAll() {
+      localStorage.clear()
+      this.todoItems = []
+    }
   },
 }
 </script>
